@@ -1,6 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import '../auth/user.js';
+import { uploadImage } from '../fetch-utils.js';
 // > Part A: import upload image
 // > Part B: import fetch to create a pet
 
@@ -25,6 +26,7 @@ imageInput.addEventListener('change', () => {
 
 petForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // addButton.disabled = true;
 
     const formData = new FormData(petForm);
 
@@ -33,6 +35,7 @@ petForm.addEventListener('submit', async (e) => {
     const imagePath = `pets/${randomFolder}/${imageFile.name}`;
     // > Part A: Call upload image with the bucket ("images"),
     // the imagePath, and the imageFile - and store the returned url
+    const url = await uploadImage('images', imagePath, imageFile);
 
     const pet = {
         // > Part B: add the name, bio, and image_url fields to the pet object
